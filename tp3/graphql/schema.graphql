@@ -1,0 +1,92 @@
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+"Indicates what fields are available at the top level of a query operation."
+type Query {
+
+  film(id: ID! @eq): Film @find
+  
+
+  "https://lighthouse-php.com/master/api-reference/directives.html#where" 
+  films(
+        search: String @scope(name: "searchKeyword")
+        min_year: Int @where(operator: ">=")
+        min_length: Int @where(clause: "where", operator: ">=", column: "length")
+        max_length: Int @where(clause: "where", operator: "<=", column: "length")
+    ): [Film!]! @paginate(defaultCount: 10)
+}
+
+"Account of a person who uses this application."
+type User {
+    "Unique primary key."
+    id: ID!
+
+    "Non-unique name."
+    name: String!
+
+    "Unique email address."
+    email: String!
+
+    "When the email was verified."
+    email_verified_at: DateTime
+
+    "When the account was created."
+    created_at: DateTime!
+
+    "When the account was last updated."
+    updated_at: DateTime!
+}
+type Actor {
+    id: ID!
+    first_name: String!
+    last_name: String!
+    birthdate: String 
+    created_at: String!
+    updated_at: String!
+    
+    
+    films: [Film!]! @belongsToMany
+}
+type Critic {
+    id: ID!
+    score: Int!
+    comment: String
+    created_at: String!
+    updated_at: String!
+    
+    film: Film! @belongsTo
+    user: User! @belongsTo
+}
+type Film {
+    id: ID!
+    title: String!
+    release_year: Int!
+    length: Int
+    description: String
+    rating: String
+    special_features: String
+    image: String
+    created_at: String!
+    updated_at: String!
+    
+    language: Language! @belongsTo
+    stats: Stats @hasOne 
+    critics: [Critic!]! @hasMany
+    actors: [Actor!]! @belongsToMany
+}
+type Language {
+    id: ID!
+    name: String!
+    created_at: String!
+    updated_at: String!
+
+    films: [Film!]! @hasMany
+}
+type Role {
+    id: ID!
+    name: String!
+    created_at: String!
+    updated_at: String!
+
+    users: [User!]! @hasMany
+}

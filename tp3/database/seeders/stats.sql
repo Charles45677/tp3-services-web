@@ -1,0 +1,16 @@
+INSERT INTO `stats` (`film_id`, `nombre_votes`, `total_notes`, `note_moyenne`, `created_at`, `updated_at`) VALUES
+(1, 25, 105, 4.20, NOW(), NOW()), 
+(2, 12, 36, 3.00, NOW(), NOW()), 
+(3, 45, 211, 4.69, NOW(), NOW()), 
+(4, 8, 16, 2.00, NOW(), NOW()),   
+(5, 0, 0, 0.00, NOW(), NOW()),    
+(6, 31, 140, 4.52, NOW(), NOW()), 
+(7, 19, 62, 3.26, NOW(), NOW()), 
+(8, 5, 23, 4.60, NOW(), NOW()),  
+(9, 52, 185, 3.56, NOW(), NOW()), 
+(10, 3, 4, 1.33, NOW(), NOW()),  
+(11, 14, 56, 4.00, NOW(), NOW()), 
+(12, 22, 78, 3.55, NOW(), NOW()), 
+(13, 0, 0, 0.00, NOW(), NOW()),    
+(14, 9, 41, 4.56, NOW(), NOW()),  
+(15, 60, 168, 2.80, NOW(), NOW()); 
