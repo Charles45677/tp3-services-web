@@ -44,7 +44,7 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         try {
-            // Validation standard en ligne
+            
             $data = $request->validate([
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
@@ -97,7 +97,7 @@ class AuthController extends Controller
                 throw new AuthenticationException();
             }
             
-            // Recréation d'un jeton (Logique de type Sanctum)
+            
             $user->tokens()->delete();
             return response()->json([
                 'token' => $user->createToken('auth_token')->plainTextToken
