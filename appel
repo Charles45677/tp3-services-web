@@ -1,0 +1,108 @@
+## Consulter un film en particulier
+
+query GetSingleFilm {
+  film(id: 1) {
+    id
+    title
+    description
+    release_year
+    length
+  }
+}
+## Consultation de tous les acteurs d’un certain film
+query GetFilmActors {
+  film(id: 1) {
+    title
+    actors {
+      last_name
+      first_name
+      birthdate
+    }
+  }
+}
+
+## Recherche de films - Cas 1 : Sans critère avec pagination (demandez la page 1)
+query SearchFilmsCas1 {
+  films(page: 1) {
+    paginatorInfo {
+      currentPage
+      hasMorePages
+      lastPage
+      total
+    }
+    data {
+      id
+      title
+      description
+      release_year
+      length
+    }
+  }
+}
+
+## Recherche de films - Cas 2 : Avec le mot-clé "AL" (sur titre ou descritpion) avec pagination (demandez la page 1)
+query SearchFilmsCas2 {
+  films(search: "AL", page: 1) {
+    paginatorInfo {
+      currentPage
+      hasMorePages
+      total
+    }
+    data {
+      id
+      title
+      description
+      release_year
+      length
+    }
+  }
+}
+
+## Recherche de films - Cas 3 : Avec le mot-clé "AL" (sur titre ou descritpion), minimum année 2006, entre 120 et 150 minutes avec pagination (demandez la page 1)
+
+query SearchFilmsCas3 {
+  films(
+    search: "AL"
+    min_year: 2006
+    min_length: 120
+    max_length: 150
+    page: 1
+  ) {
+    paginatorInfo {
+      currentPage
+      hasMorePages
+      total
+    }
+    data {
+      id
+      title
+      description
+      release_year
+      length
+    }
+  }
+}
+## Consulter les informations de l’utilisateur authentifié
+query GetMyProfile {
+  me {
+    id
+    email
+    first_name
+    last_name
+  }
+}
+
+## Consulter les critiques de l’utilisateur authentifié
+
+query GetOnlyMyCritics {
+  myCritics {
+    id
+    score
+    comment
+    created_at
+  }
+}
+## Ajout d’une critique de film
+
+
+## Ajout d’un acteur (lier l'acteur au film 1, mettre à jour l'image du film 2)
